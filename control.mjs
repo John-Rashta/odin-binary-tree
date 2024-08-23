@@ -147,5 +147,13 @@ console.log(newTree.isBalanced())
 newTree.rebalance();
 console.log(newTree.isBalanced())
 newTree.insert(2);
+newTree.deleteItem(67)
+newTree.deleteItem(87)
+newTree.insert(38);
+newTree.deleteItem(55)
+newTree.deleteItem(7)
+newTree.deleteItem(142)
+newTree.deleteItem(111)
+
 prettyPrint(newTree.getRoot());
 console.log(newTree.depth(newTree.find(3)))

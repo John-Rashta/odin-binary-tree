@@ -84,13 +84,15 @@ const getDepth = function getDepthOfNode(root, node) {
 const deleteHelper = function helpDeleteValuesByHavingAllOptions(root) {
     if (root.left === null) {
         root.value = root.right.value;
-        root.right = null;
+        root.left  = root.right.left;
+        root.right = root.right.right;
         return [null, null];
     }
 
     if (root.right === null) {
         root.value = root.left.value;
-        root.left = null;
+        root.right = root.left.right;
+        root.left = root.left.left;
         return [null, null];
     }
 
@@ -100,6 +102,11 @@ const deleteHelper = function helpDeleteValuesByHavingAllOptions(root) {
     }
 
     root.value = replacementNode.value;
+    if (root.right.right === null && root.right.left === null) {
+        root.right = null;
+        return [null, null];
+
+    }
     return [root.right, replacementNode.value];
 }
 
@@ -112,11 +119,6 @@ const deleteValue = function deleteValueFromTree(root, value) {
         const [newRoot, newValue] = deleteHelper(root);
         if (!newRoot) {
             return;
-        }
-        if (newRoot.right === null && newRoot.left === null) {
-            root.right = null;
-            return;
-
         }
         deleteValue(newRoot, newValue);
     }else if (root.value > value) {
